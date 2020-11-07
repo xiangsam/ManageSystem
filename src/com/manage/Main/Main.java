@@ -20,8 +20,9 @@ public class Main extends JFrame {
     private ReservePanel reservePanel;
     private DishPanel dishPanel;
     private PasswordPanel passwordPanel;
-    //设置四个label 为nav所有 分别为处理记录，查询记录，重置密码，菜单管理
-    private JLabel reserveLabel, balanceLabel,passwdLabel,dishLabel,newLabel;
+    private TablePanel tablePanel;
+    //设置四个label 为nav所有 分别为处理记录，查询记录，重置密码，菜单管理，餐桌管理
+    private JLabel reserveLabel, balanceLabel,passwdLabel,dishLabel,tableLabel,newLabel;
     //桌面图片
     private JLabel imageLabel;
     //设置上方的菜单栏
@@ -65,6 +66,7 @@ public class Main extends JFrame {
         this.add(passwordPanel,BorderLayout.CENTER);
         this.add(balancePanel, BorderLayout.CENTER);
         this.add(dishPanel, BorderLayout.CENTER);
+        this.add(tablePanel,BorderLayout.CENTER);
          this.add(imageLabel,BorderLayout.CENTER);
         // show the window
 
@@ -100,6 +102,10 @@ public class Main extends JFrame {
         dishLabel.setPreferredSize(new Dimension(100, 30));
         dishLabel.setCursor(new Cursor(Cursor.HAND_CURSOR)); // 当鼠标移到标签上时显示手型图标
 
+        tableLabel = new JLabel("餐桌管理", SwingConstants.CENTER);
+        tableLabel.setPreferredSize(new Dimension(100, 30));
+        tableLabel.setCursor(new Cursor(Cursor.HAND_CURSOR)); // 当鼠标移到标签上时显示手型图标
+
         passwdLabel = new JLabel("重置密码", SwingConstants.CENTER);
         passwdLabel.setPreferredSize(new Dimension(100, 30));
         passwdLabel.setCursor(new Cursor(Cursor.HAND_CURSOR)); // 当鼠标移到标签上时显示手型图标
@@ -112,6 +118,7 @@ public class Main extends JFrame {
         navigatorPanel.add(reserveLabel);
         navigatorPanel.add(balanceLabel);
         navigatorPanel.add(dishLabel);
+        navigatorPanel.add(tableLabel);
         navigatorPanel.add(passwdLabel);
         navigatorPanel.add(newLabel);
 
@@ -120,6 +127,7 @@ public class Main extends JFrame {
         balanceLabel.addMouseListener(new LabelClick());
         passwdLabel.addMouseListener(new LabelClick());
         dishLabel.addMouseListener(new LabelClick());
+        tableLabel.addMouseListener(new LabelClick());
         newLabel.addMouseListener(new LabelClick());
     }
 
@@ -136,6 +144,9 @@ public class Main extends JFrame {
 
         dishPanel = new DishPanel();
         dishPanel.setVisible(false);
+
+        tablePanel = new TablePanel();
+        tablePanel.setVisible(false);
         //加载菜单栏
         menuBar = new JMenuBar();
         //创建系统外观菜单
@@ -177,6 +188,7 @@ public void buildPreMenu() {
                 reserveLabel.setForeground(Color.red);
                 balanceLabel.setForeground(Color.black);
                 dishLabel.setForeground(Color.black);
+                tableLabel.setForeground(Color.black);
                 passwdLabel.setForeground(Color.black);
                 newLabel.setForeground(Color.BLACK);
                 // show the first panel
@@ -187,6 +199,7 @@ public void buildPreMenu() {
                 }
                 // 原先显示的面板设置为不可见
                 balancePanel.setVisible(false);
+                tablePanel.setVisible(false);
                 dishPanel.setVisible(false);
                 passwordPanel.setVisible(false);
             } else if (e.getSource() == balanceLabel) {
@@ -195,6 +208,7 @@ public void buildPreMenu() {
                 balanceLabel.setForeground(Color.red);
                 reserveLabel.setForeground(Color.black);
                 dishLabel.setForeground(Color.black);
+                tableLabel.setForeground(Color.black);
                 passwdLabel.setForeground(Color.black);
                 newLabel.setForeground(Color.BLACK);
                 // show the second panel
@@ -204,6 +218,7 @@ public void buildPreMenu() {
                 }
                 reservePanel.setVisible(false);
                 dishPanel.setVisible(false);
+                tablePanel.setVisible(false);
                 passwordPanel.setVisible(false);
             }else if(e.getSource() == dishLabel){
                 imageLabel.setVisible(false);
@@ -211,6 +226,7 @@ public void buildPreMenu() {
                 dishLabel.setForeground(Color.red);
                 reserveLabel.setForeground(Color.black);
                 balanceLabel.setForeground(Color.black);
+                tableLabel.setForeground(Color.black);
                 passwdLabel.setForeground(Color.black);
                 newLabel.setForeground(Color.BLACK);
                 // show the second panel
@@ -220,6 +236,25 @@ public void buildPreMenu() {
                 }
                 reservePanel.setVisible(false);
                 balancePanel.setVisible(false);
+                tablePanel.setVisible(false);
+                passwordPanel.setVisible(false);
+            }else if (e.getSource() == tableLabel) {
+                imageLabel.setVisible(false);
+                // the label clicked is set to red, other labels are black
+                balanceLabel.setForeground(Color.black);
+                reserveLabel.setForeground(Color.black);
+                dishLabel.setForeground(Color.black);
+                tableLabel.setForeground(Color.RED);
+                passwdLabel.setForeground(Color.black);
+                newLabel.setForeground(Color.BLACK);
+                // show the second panel
+                if (!tablePanel.isVisible()) {
+                    Main.this.add(tablePanel, BorderLayout.CENTER);
+                    tablePanel.setVisible(true);
+                }
+                balancePanel.setVisible(false);
+                reservePanel.setVisible(false);
+                dishPanel.setVisible(false);
                 passwordPanel.setVisible(false);
             }else if(e.getSource() == passwdLabel){
                 imageLabel.setVisible(false);
@@ -227,6 +262,7 @@ public void buildPreMenu() {
                 passwdLabel.setForeground(Color.red);
                 reserveLabel.setForeground(Color.black);
                 dishLabel.setForeground(Color.black);
+                tableLabel.setForeground(Color.black);
                 balanceLabel.setForeground(Color.black);
                 newLabel.setForeground(Color.BLACK);
                 // show the second panel
@@ -236,6 +272,7 @@ public void buildPreMenu() {
                 }
                 reservePanel.setVisible(false);
                 balancePanel.setVisible(false);
+                tablePanel.setVisible(false);
                 dishPanel.setVisible(false);
             }else if(e.getSource() == newLabel){
                 imageLabel.setVisible(false);
@@ -244,26 +281,32 @@ public void buildPreMenu() {
                 reserveLabel.setForeground(Color.black);
                 dishLabel.setForeground(Color.black);
                 balanceLabel.setForeground(Color.black);
+                tableLabel.setForeground(Color.black);
                 newLabel.setForeground(Color.RED);
                 reservePanel.setVisible(false);
                 balancePanel.setVisible(false);
                 dishPanel.setVisible(false);
+                tablePanel.setVisible(false);
                 passwordPanel.setVisible(false);
                 remove(reservePanel);
                 remove(balancePanel);
                 remove(dishPanel);
                 remove(passwordPanel);
+                remove(tablePanel);
                 reservePanel = new ReservePanel();
                 balancePanel = new BalancePanel();
                 dishPanel = new DishPanel();
                 passwordPanel = new PasswordPanel();
+                tablePanel = new TablePanel();
                 add(reservePanel);
                 add(balancePanel);
                 add(dishPanel);
+                add(tablePanel);
                 add(passwordPanel);
                 reservePanel.setVisible(true);
                 balancePanel.setVisible(false);
                 dishPanel.setVisible(false);
+                tablePanel.setVisible(false);
                 passwordPanel.setVisible(false);
             }
         }
@@ -283,6 +326,7 @@ public void buildPreMenu() {
                     SwingUtilities.updateComponentTreeUI(balancePanel);
                     SwingUtilities.updateComponentTreeUI(dishPanel);
                     SwingUtilities.updateComponentTreeUI(passwordPanel);
+                    SwingUtilities.updateComponentTreeUI(tablePanel);
 
                 } catch(Exception e){
                     JOptionPane.showMessageDialog(null,
@@ -300,6 +344,7 @@ public void buildPreMenu() {
                     SwingUtilities.updateComponentTreeUI(balanceLabel);
                     SwingUtilities.updateComponentTreeUI(dishPanel);
                     SwingUtilities.updateComponentTreeUI(passwordPanel);
+                    SwingUtilities.updateComponentTreeUI(tablePanel);
 
                 } catch(Exception e){
                     JOptionPane.showMessageDialog(null,
@@ -317,6 +362,7 @@ public void buildPreMenu() {
                     SwingUtilities.updateComponentTreeUI(balancePanel);
                     SwingUtilities.updateComponentTreeUI(dishPanel);
                     SwingUtilities.updateComponentTreeUI(passwordPanel);
+                    SwingUtilities.updateComponentTreeUI(tablePanel);
 
                 } catch(Exception e){
                     JOptionPane.showMessageDialog(null,
