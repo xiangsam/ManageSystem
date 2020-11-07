@@ -21,7 +21,7 @@ public class Main extends JFrame {
     private DishPanel dishPanel;
     private PasswordPanel passwordPanel;
     //设置四个label 为nav所有 分别为处理记录，查询记录，重置密码，菜单管理
-    private JLabel reserveLabel, balanceLabel,passwdLabel,dishLabel;
+    private JLabel reserveLabel, balanceLabel,passwdLabel,dishLabel,newLabel;
     //桌面图片
     private JLabel imageLabel;
     //设置上方的菜单栏
@@ -104,21 +104,27 @@ public class Main extends JFrame {
         passwdLabel.setPreferredSize(new Dimension(100, 30));
         passwdLabel.setCursor(new Cursor(Cursor.HAND_CURSOR)); // 当鼠标移到标签上时显示手型图标
 
+        newLabel = new JLabel("刷新", SwingConstants.CENTER);
+        newLabel.setPreferredSize(new Dimension(100, 30));
+        newLabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
         // add the labels to the panel
         navigatorPanel.add(reserveLabel);
         navigatorPanel.add(balanceLabel);
         navigatorPanel.add(dishLabel);
         navigatorPanel.add(passwdLabel);
+        navigatorPanel.add(newLabel);
 
         // register action listener for the navigator labels
         reserveLabel.addMouseListener(new LabelClick());
         balanceLabel.addMouseListener(new LabelClick());
         passwdLabel.addMouseListener(new LabelClick());
         dishLabel.addMouseListener(new LabelClick());
+        newLabel.addMouseListener(new LabelClick());
     }
 
     public void buildOtherPanels() {
-        // 下面创建两个面板对象，它们将会显示在同一个区域，但同一时刻只有一个可见
+        // 下面创建面板对象，它们将会显示在同一个区域，但同一时刻只有一个可见
         balancePanel = new BalancePanel();
         balancePanel.setVisible(false);
 
@@ -170,7 +176,9 @@ public void buildPreMenu() {
                 // the label clicked is set to red, other labels are black
                 reserveLabel.setForeground(Color.red);
                 balanceLabel.setForeground(Color.black);
+                dishLabel.setForeground(Color.black);
                 passwdLabel.setForeground(Color.black);
+                newLabel.setForeground(Color.BLACK);
                 // show the first panel
                 // 把要显示的面板放入指定区域
                 if (!reservePanel.isVisible()) {
@@ -186,7 +194,9 @@ public void buildPreMenu() {
                 // the label clicked is set to red, other labels are black
                 balanceLabel.setForeground(Color.red);
                 reserveLabel.setForeground(Color.black);
+                dishLabel.setForeground(Color.black);
                 passwdLabel.setForeground(Color.black);
+                newLabel.setForeground(Color.BLACK);
                 // show the second panel
                 if (!balancePanel.isVisible()) {
                     Main.this.add(balancePanel, BorderLayout.CENTER);
@@ -198,10 +208,11 @@ public void buildPreMenu() {
             }else if(e.getSource() == dishLabel){
                 imageLabel.setVisible(false);
                 // the label clicked is set to red, other labels are black
-                dishPanel.setForeground(Color.red);
+                dishLabel.setForeground(Color.red);
                 reserveLabel.setForeground(Color.black);
                 balanceLabel.setForeground(Color.black);
                 passwdLabel.setForeground(Color.black);
+                newLabel.setForeground(Color.BLACK);
                 // show the second panel
                 if (!dishPanel.isVisible()) {
                     Main.this.add(dishPanel, BorderLayout.CENTER);
@@ -215,7 +226,9 @@ public void buildPreMenu() {
                 // the label clicked is set to red, other labels are black
                 passwdLabel.setForeground(Color.red);
                 reserveLabel.setForeground(Color.black);
+                dishLabel.setForeground(Color.black);
                 balanceLabel.setForeground(Color.black);
+                newLabel.setForeground(Color.BLACK);
                 // show the second panel
                 if (!passwordPanel.isVisible()) {
                     Main.this.add(passwordPanel, BorderLayout.CENTER);
@@ -224,6 +237,34 @@ public void buildPreMenu() {
                 reservePanel.setVisible(false);
                 balancePanel.setVisible(false);
                 dishPanel.setVisible(false);
+            }else if(e.getSource() == newLabel){
+                imageLabel.setVisible(false);
+                // the label clicked is set to red, other labels are black
+                passwdLabel.setForeground(Color.black);
+                reserveLabel.setForeground(Color.black);
+                dishLabel.setForeground(Color.black);
+                balanceLabel.setForeground(Color.black);
+                newLabel.setForeground(Color.RED);
+                reservePanel.setVisible(false);
+                balancePanel.setVisible(false);
+                dishPanel.setVisible(false);
+                passwordPanel.setVisible(false);
+                remove(reservePanel);
+                remove(balancePanel);
+                remove(dishPanel);
+                remove(passwordPanel);
+                reservePanel = new ReservePanel();
+                balancePanel = new BalancePanel();
+                dishPanel = new DishPanel();
+                passwordPanel = new PasswordPanel();
+                add(reservePanel);
+                add(balancePanel);
+                add(dishPanel);
+                add(passwordPanel);
+                reservePanel.setVisible(true);
+                balancePanel.setVisible(false);
+                dishPanel.setVisible(false);
+                passwordPanel.setVisible(false);
             }
         }
     }

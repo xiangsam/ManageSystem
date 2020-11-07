@@ -107,12 +107,12 @@ public class PasswordPanel extends JPanel{
                    }else if(!newTextField.getText().toString().equals(configTextField.getText().toString())){
                        JOptionPane.showMessageDialog(null, "新密码两次填写不相同", "警告", JOptionPane.ERROR_MESSAGE);
                    }else{
-                       //进行跟新操作
+                       //进行更新操作
                        String updatePasswordSql = "UPDATE security SET password = \'" + newTextField.getText().toString() + "\' WHERE userName = 'admin'";
                        if(jdbcMySQL.update(updatePasswordSql) == 1){
-                           JOptionPane.showMessageDialog(null, "跟新密码成功", "恭喜您", JOptionPane.INFORMATION_MESSAGE);
+                           JOptionPane.showMessageDialog(null, "更新密码成功", "恭喜您", JOptionPane.INFORMATION_MESSAGE);
                        }else{
-                           JOptionPane.showMessageDialog(null, "跟新密码失败", "警告", JOptionPane.ERROR_MESSAGE);
+                           JOptionPane.showMessageDialog(null, "更新密码失败", "警告", JOptionPane.ERROR_MESSAGE);
                        }
                    }
                }catch(SQLException e1){
