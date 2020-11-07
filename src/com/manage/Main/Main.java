@@ -274,7 +274,7 @@ public void buildPreMenu() {
         @Override
         public void actionPerformed(ActionEvent ex) {
             if(ex.getSource() == metalItem){
-                //设置窗体的风格
+                //设置窗体风格
                 try {
                     UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
                     SwingUtilities.updateComponentTreeUI(navigatorPanel);
