@@ -78,7 +78,7 @@ public class Login extends JFrame {
 
                         try {
 
-                            String jdbcPath = "jdbc:mysql://localhost:3306/resdb";
+                            String jdbcPath = "jdbc:mysql://49.232.209.19:3306/resdb?useUnicode=true&characterEncoding=utf-8";
                             String user = username;
                             String pass = password;
                             conn = DriverManager.getConnection(jdbcPath, user, pass);

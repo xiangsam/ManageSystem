@@ -12,7 +12,7 @@ public class JDBCMySQL {
 
         try {
             Class.forName(names);
-            String jdbcPath = "jdbc:mysql://localhost:3306/resdb";
+            String jdbcPath = "jdbc:mysql://49.232.209.19:3306/resdb?useUnicode=true&characterEncoding=utf-8";
             String user = "resuser";
             String pass = "clt123456";
             try {
