@@ -237,18 +237,18 @@ public class DishPanel extends JPanel{
                         Double dishprice = Double.valueOf(dishpriceTextField.getText().toString());
                         int dishtype = dishtypebox.getSelectedIndex();
                         String dishdescription = dishdescriptionTextField.getText().toString();
-                        String sql = "UPDATE balance SET dish_id = " + dishid + ",dish_name=\'"+dishname+"\',dish_url=\'"+dishurl+"\',hot_status=" + hotstatus+",is_sign="+issign+",is_new_dish="+isnewdish+",dish_price="+dishprice+",dish_type="+dishtype+",\'"+dishdescription+"\' where dishid = " + dishid;
+                        String sql = "UPDATE dish SET dish_id = " + dishid + ",dish_name=\'"+dishname+"\',dish_url=\'"+dishurl+"\',hot_status=" + hotstatus+",is_sign="+issign+",is_new_dish="+isnewdish+",dish_price="+dishprice+",dish_type="+dishtype+",dish_description=\'"+dishdescription+"\' where dish_id = " + dishid;
                         if(jdbcMySQL.update(sql) > 0) {
                             JOptionPane.showMessageDialog(null, "修改成功", "恭喜您", JOptionPane.INFORMATION_MESSAGE);
-                            objects[totalRows - 1][0] = String.valueOf(dishid);
-                            objects[totalRows - 1][1] = dishname;
-                            objects[totalRows - 1][2] = dishurl;
-                            objects[totalRows - 1][3] = String.valueOf(hotstatus);
-                            objects[totalRows - 1][4] = String.valueOf(issign);
-                            objects[totalRows - 1][5] = String.valueOf(isnewdish);
-                            objects[totalRows - 1][6] = String.valueOf(dishprice);
-                            objects[totalRows - 1][7] = String.valueOf(dishtype);
-                            objects[totalRows - 1][8] = dishdescription;
+                            objects[selectRows][0] = String.valueOf(dishid);
+                            objects[selectRows][1] = dishname;
+                            objects[selectRows][2] = dishurl;
+                            objects[selectRows][3] = String.valueOf(hotstatus);
+                            objects[selectRows][4] = String.valueOf(issign);
+                            objects[selectRows][5] = String.valueOf(isnewdish);
+                            objects[selectRows][6] = String.valueOf(dishprice);
+                            objects[selectRows][7] = String.valueOf(dishtype);
+                            objects[selectRows][8] = dishdescription;
                             model.setDataVector(objects,titles);
 
                         }else
@@ -264,7 +264,7 @@ public class DishPanel extends JPanel{
                 public void actionPerformed(ActionEvent e) {
                     //向前移动一行
                     String dishid = dishidTextField.getText().toString();
-                    String sql = "delete from balance where dishid = " + dishid;
+                    String sql = "delete from dish where dish_id = " + dishid;
                     if(jdbcMySQL.deleteOrInsert(sql)> 0){
                         JOptionPane.showMessageDialog(null, "删除成功", "恭喜您", JOptionPane.INFORMATION_MESSAGE);
                         //前几行和他一样
