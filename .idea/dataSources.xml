@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="resdb@localhost" uuid="e7272948-75d5-49a1-8998-d7e0a768cc3f">
+    <data-source source="LOCAL" name="resdb@49.232.209.19" uuid="e43f6b58-672a-4822-af45-60c35970c2b7">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://localhost:3306/resdb</jdbc-url>
+      <jdbc-url>jdbc:mysql://49.232.209.19:3306/resdb</jdbc-url>
     </data-source>
   </component>
 </project>
