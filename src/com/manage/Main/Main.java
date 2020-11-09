@@ -36,6 +36,7 @@ public class Main extends JFrame {
     public Main(){
         ImageIcon icon = new ImageIcon("background.jpg");
         imageLabel = new JLabel(icon);
+
         //设置一些默认值
         // set title
         this.setTitle("后台管理系统");
@@ -377,7 +378,11 @@ public class Main extends JFrame {
         }
     }
     public static void main(String[] args) {
-        new Main();
+        EventQueue.invokeLater(()->{
+            JFrame frame = new Main();
+            Image img = new ImageIcon("icon.gif").getImage();
+            frame.setIconImage(img);
+        });
     }
 
 }
