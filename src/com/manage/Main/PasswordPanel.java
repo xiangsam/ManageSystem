@@ -37,10 +37,10 @@ public class PasswordPanel extends JPanel{
         titlePanel = new JPanel();
 
         // 设置标题面板的大小
-        titlePanel.setPreferredSize(new Dimension(600, 140));
+        titlePanel.setPreferredSize(new Dimension(600, 70));
 
         // 设置标题面板上下左右的边距
-        titlePanel.setBorder(BorderFactory.createEmptyBorder(40, 0, 0, 0));
+        titlePanel.setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 0));
 
         // 设置标题的字体及大小
         title = new JLabel("重置密码", SwingConstants.CENTER);
@@ -83,10 +83,10 @@ public class PasswordPanel extends JPanel{
         btnPanelLayout.setAlignment(FlowLayout.CENTER);
         btnPanel.add(configBtn);
 
-       centerPanel.add(oldPanel);
+        centerPanel.add(oldPanel);
         centerPanel.add(newPanel);
         centerPanel.add(configPanel);
-         centerPanel.add(btnPanel);
+        centerPanel.add(btnPanel);
         this.add(centerPanel,BorderLayout.CENTER);
 //点击事件
         configBtn.addActionListener(new ActionListener() {
@@ -98,25 +98,25 @@ public class PasswordPanel extends JPanel{
                 String oldPasswordIndb = "";
                 String oldSql = "select password from security where userName = 'resuser'";
                 ResultSet res = jdbcMySQL.query(oldSql);
-               try {
-                   if (res.next()) {
-                       oldPasswordIndb = res.getString("password");
-                   }
-                   if(!oldTextField.getText().toString().equals(oldPasswordIndb)) {
-                       JOptionPane.showMessageDialog(null, "旧密码填写错误", "警告", JOptionPane.ERROR_MESSAGE);
-                   }else if(!newTextField.getText().toString().equals(configTextField.getText().toString())){
-                       JOptionPane.showMessageDialog(null, "新密码两次填写不相同", "警告", JOptionPane.ERROR_MESSAGE);
-                   }else{
-                       //进行更新操作
-                       String updatePasswordSql = "UPDATE security SET password = \'" + newTextField.getText().toString() + "\' WHERE userName = 'admin'";
-                       if(jdbcMySQL.update(updatePasswordSql) == 1){
-                           JOptionPane.showMessageDialog(null, "更新密码成功", "恭喜您", JOptionPane.INFORMATION_MESSAGE);
-                       }else{
-                           JOptionPane.showMessageDialog(null, "更新密码失败", "警告", JOptionPane.ERROR_MESSAGE);
-                       }
-                   }
-               }catch(SQLException e1){
-                   e1.printStackTrace();
+                try {
+                    if (res.next()) {
+                        oldPasswordIndb = res.getString("password");
+                    }
+                    if(!new String(newTextField.getPassword()).equals(oldPasswordIndb)) {
+                        JOptionPane.showMessageDialog(null, "旧密码填写错误", "警告", JOptionPane.ERROR_MESSAGE);
+                    }else if(!new String(newTextField.getPassword()).equals(new String(configTextField.getPassword()))){
+                        JOptionPane.showMessageDialog(null, "新密码两次填写不相同", "警告", JOptionPane.ERROR_MESSAGE);
+                    }else{
+                        //进行更新操作
+                        String updatePasswordSql = "UPDATE security SET password = \'" + (new String(newTextField.getPassword())) + "\' WHERE userName = 'admin'";
+                        if(jdbcMySQL.update(updatePasswordSql) == 1){
+                            JOptionPane.showMessageDialog(null, "更新密码成功", "恭喜您", JOptionPane.INFORMATION_MESSAGE);
+                        }else{
+                            JOptionPane.showMessageDialog(null, "更新密码失败", "警告", JOptionPane.ERROR_MESSAGE);
+                        }
+                    }
+                }catch(SQLException e1){
+                    e1.printStackTrace();
                     JOptionPane.showMessageDialog(null, "数据库链接失败", "警告", JOptionPane.ERROR_MESSAGE);
                 }
 

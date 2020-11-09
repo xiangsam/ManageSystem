@@ -62,10 +62,10 @@ public class DishPanel extends JPanel{
         titlePanel = new JPanel();
 
         // 设置标题面板的大小
-        titlePanel.setPreferredSize(new Dimension(600, 140));
+        titlePanel.setPreferredSize(new Dimension(600, 60));
 
         // 设置标题面板上下左右的边距
-        titlePanel.setBorder(BorderFactory.createEmptyBorder(40, 0, 0, 0));
+        titlePanel.setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 0));
 
         // 设置标题的字体及大小
         title = new JLabel("菜单管理", SwingConstants.CENTER);
@@ -89,7 +89,7 @@ public class DishPanel extends JPanel{
             }
             DefaultTableModel model = new DefaultTableModel(objects,titles);
             table = new JTable(model);
-            table.setPreferredScrollableViewportSize(new Dimension(660, 170));
+            table.setPreferredScrollableViewportSize(new Dimension(1100, 150));
             table.setRowHeight(30);
             scrollPane = new JScrollPane(table);
 

@@ -50,10 +50,10 @@ public class BalancePanel extends JPanel{
         titlePanel = new JPanel();
 
         // 设置标题面板的大小
-        titlePanel.setPreferredSize(new Dimension(600, 140));
+        titlePanel.setPreferredSize(new Dimension(600, 60));
 
         // 设置标题面板上下左右的边距
-        titlePanel.setBorder(BorderFactory.createEmptyBorder(40, 0, 0, 0));
+        titlePanel.setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 0));
 
         // 设置标题的字体及大小
         title = new JLabel("点餐信息", SwingConstants.CENTER);
@@ -77,12 +77,12 @@ public class BalancePanel extends JPanel{
             }
             DefaultTableModel model = new DefaultTableModel(objects,titles);
             table = new JTable(model);
-            table.setPreferredScrollableViewportSize(new Dimension(660, 170));
+            table.setPreferredScrollableViewportSize(new Dimension(1100, 150));
             table.setRowHeight(30);
             scrollPane = new JScrollPane(table);
 
             editPanel.add(idLabel);
-            idTextField.setColumns(8);
+            idTextField.setColumns(18);
             editPanel.add(idTextField);
 
             editPanel.add(isdeleteLabel);
@@ -104,17 +104,15 @@ public class BalancePanel extends JPanel{
             centerPanel.setLayout(new BorderLayout());
             centerPanel.add(scrollPane);
             centerPanel.add(editPanel,BorderLayout.SOUTH);
-            //南部面板
-            // southPanel.add(editPanel);
-            southPanel.add(insertBtn);
-            southPanel.add(updateBtn);
-            southPanel.add(deleteBtn);
+            editPanel.add(insertBtn);
+            editPanel.add(updateBtn);
+            editPanel.add(deleteBtn);
 
 
             // 把标题面板加入first panel面板
             this.add(titlePanel, BorderLayout.NORTH);
             this.add(centerPanel,BorderLayout.CENTER);
-            this.add(southPanel,BorderLayout.SOUTH);
+
 
 //table点击某一行
             table.addMouseListener(new MouseAdapter() {

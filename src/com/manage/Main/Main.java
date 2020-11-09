@@ -10,9 +10,10 @@ import java.awt.event.MouseEvent;
 
 //主界面
 public class Main extends JFrame {
+
     private static final long serialVersionUID = 1L;
-    private int WINDOW_WIDTH = 1000;
-    private int WINDOW_HEIGHT = 600;
+    private int WINDOW_WIDTH = 1300;
+    private int WINDOW_HEIGHT = 380;
     //左侧的导航栏
     private JPanel navigatorPanel;
     //四个面板
@@ -31,9 +32,9 @@ public class Main extends JFrame {
     private JMenu preMenu;
 
     //外观菜单的item  3个风格的item
-  private  JRadioButtonMenuItem  metalItem,metifItem,windowItem;
+    private  JRadioButtonMenuItem  metalItem,metifItem,windowItem;
     public Main(){
-        ImageIcon icon = new ImageIcon("/src/background.jpg");
+        ImageIcon icon = new ImageIcon("background.jpg");
         imageLabel = new JLabel(icon);
         //设置一些默认值
         // set title
@@ -61,13 +62,12 @@ public class Main extends JFrame {
 
         // 把要显示的两个面板对象到放到相同区域，在窗体中显示的为最后放入的面板。
         // 这样做的目的是把两个对象都和该窗体关联起来。只有关联起来，之后应用外观风格（例如Motif）才会作用于这两个面板对象。
-
+        this.add(imageLabel,BorderLayout.CENTER);
         this.add(reservePanel, BorderLayout.CENTER);
         this.add(passwordPanel,BorderLayout.CENTER);
         this.add(balancePanel, BorderLayout.CENTER);
         this.add(dishPanel, BorderLayout.CENTER);
         this.add(tablePanel,BorderLayout.CENTER);
-         this.add(imageLabel,BorderLayout.CENTER);
         // show the window
 
 
@@ -81,17 +81,18 @@ public class Main extends JFrame {
         navigatorPanel = new JPanel();
 
         // 设置边框来控制外观以及上下左右边距
-        Border insideBorder = BorderFactory.createEmptyBorder(20, 0, 0, 0);
-        Border outsideBorder = BorderFactory.createLoweredBevelBorder();
-        navigatorPanel.setBorder(BorderFactory.createCompoundBorder(
-                outsideBorder, insideBorder));
+        Border insideBorder = BorderFactory.createLoweredSoftBevelBorder();
+        Border outsideBorder = BorderFactory.createTitledBorder(insideBorder,"导航栏");
+        navigatorPanel.setBorder(outsideBorder);
 
         // set the size for the navigator panel
         navigatorPanel.setPreferredSize(new Dimension(100, 500));
         //4个label的创建
         // create label objects for navigator
         reserveLabel = new JLabel("预约处理", SwingConstants.CENTER);
-        reserveLabel.setPreferredSize(new Dimension(100, 30));
+        //reserveLabel.setBorder(BorderFactory.createCompoundBorder(
+        //outsideBorder, insideBorder));
+        //reserveLabel.setPreferredSize(new Dimension(100, 30));
         reserveLabel.setCursor(new Cursor(Cursor.HAND_CURSOR)); // 当鼠标移到标签上时显示手型图标
 
         balanceLabel = new JLabel("订单处理", SwingConstants.CENTER);
@@ -113,6 +114,7 @@ public class Main extends JFrame {
         newLabel = new JLabel("刷新", SwingConstants.CENTER);
         newLabel.setPreferredSize(new Dimension(100, 30));
         newLabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
 
         // add the labels to the panel
         navigatorPanel.add(reserveLabel);
@@ -147,6 +149,7 @@ public class Main extends JFrame {
 
         tablePanel = new TablePanel();
         tablePanel.setVisible(false);
+
         //加载菜单栏
         menuBar = new JMenuBar();
         //创建系统外观菜单
@@ -157,27 +160,27 @@ public class Main extends JFrame {
     }
 
 
-//创建系统外观菜单
-public void buildPreMenu() {
-    preMenu = new JMenu("系统外观");
-    metalItem = new JRadioButtonMenuItem("Metal风格");
-    metifItem = new JRadioButtonMenuItem("Metif风格");
-    windowItem = new JRadioButtonMenuItem("Windows风格");
-    ButtonGroup group = new ButtonGroup();
-    group.add(metalItem);
-    group.add(metifItem);
-    group.add(windowItem);
-    metalItem.setSelected(true);
-    preMenu.add(metalItem);
-    preMenu.add(metifItem);
-    preMenu.add(windowItem);
-    PreMenuItemListener itemListener = new PreMenuItemListener();
-    metifItem.addActionListener(itemListener);
-    metalItem.addActionListener(itemListener);
-    windowItem.addActionListener(itemListener);
+    //创建系统外观菜单
+    public void buildPreMenu() {
+        preMenu = new JMenu("系统外观");
+        metalItem = new JRadioButtonMenuItem("Metal风格");
+        metifItem = new JRadioButtonMenuItem("Metif风格");
+        windowItem = new JRadioButtonMenuItem("Windows风格");
+        ButtonGroup group = new ButtonGroup();
+        group.add(metalItem);
+        group.add(metifItem);
+        group.add(windowItem);
+        metalItem.setSelected(true);
+        preMenu.add(metalItem);
+        preMenu.add(metifItem);
+        preMenu.add(windowItem);
+        PreMenuItemListener itemListener = new PreMenuItemListener();
+        metifItem.addActionListener(itemListener);
+        metalItem.addActionListener(itemListener);
+        windowItem.addActionListener(itemListener);
 
-}
-//四个label的点击事件 切换不同的panel
+    }
+    //四个label的点击事件 切换不同的panel
     public class LabelClick extends MouseAdapter {
         @Override
         public void mouseClicked(MouseEvent e) {
@@ -205,7 +208,7 @@ public void buildPreMenu() {
             } else if (e.getSource() == balanceLabel) {
                 imageLabel.setVisible(false);
                 // the label clicked is set to red, other labels are black
-                balanceLabel.setForeground(Color.red);
+                balanceLabel.setForeground(Color.ORANGE);
                 reserveLabel.setForeground(Color.black);
                 dishLabel.setForeground(Color.black);
                 tableLabel.setForeground(Color.black);
@@ -223,7 +226,7 @@ public void buildPreMenu() {
             }else if(e.getSource() == dishLabel){
                 imageLabel.setVisible(false);
                 // the label clicked is set to red, other labels are black
-                dishLabel.setForeground(Color.red);
+                dishLabel.setForeground(Color.BLUE);
                 reserveLabel.setForeground(Color.black);
                 balanceLabel.setForeground(Color.black);
                 tableLabel.setForeground(Color.black);
@@ -244,7 +247,7 @@ public void buildPreMenu() {
                 balanceLabel.setForeground(Color.black);
                 reserveLabel.setForeground(Color.black);
                 dishLabel.setForeground(Color.black);
-                tableLabel.setForeground(Color.RED);
+                tableLabel.setForeground(Color.MAGENTA);
                 passwdLabel.setForeground(Color.black);
                 newLabel.setForeground(Color.BLACK);
                 // show the second panel
@@ -259,7 +262,7 @@ public void buildPreMenu() {
             }else if(e.getSource() == passwdLabel){
                 imageLabel.setVisible(false);
                 // the label clicked is set to red, other labels are black
-                passwdLabel.setForeground(Color.red);
+                passwdLabel.setForeground(Color.green);
                 reserveLabel.setForeground(Color.black);
                 dishLabel.setForeground(Color.black);
                 tableLabel.setForeground(Color.black);
@@ -282,7 +285,7 @@ public void buildPreMenu() {
                 dishLabel.setForeground(Color.black);
                 balanceLabel.setForeground(Color.black);
                 tableLabel.setForeground(Color.black);
-                newLabel.setForeground(Color.RED);
+                newLabel.setForeground(Color.pink);
                 reservePanel.setVisible(false);
                 balancePanel.setVisible(false);
                 dishPanel.setVisible(false);
@@ -337,7 +340,7 @@ public void buildPreMenu() {
             }
             if(ex.getSource() == metifItem) {
                 try {
-         UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel");
+                    UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel");
                     SwingUtilities.updateComponentTreeUI(navigatorPanel);
                     SwingUtilities.updateComponentTreeUI(menuBar);
                     SwingUtilities.updateComponentTreeUI(reservePanel);
@@ -374,7 +377,7 @@ public void buildPreMenu() {
         }
     }
     public static void main(String[] args) {
-      new Main();
+        new Main();
     }
 
 }
